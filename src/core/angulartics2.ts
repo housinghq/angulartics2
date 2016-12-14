@@ -21,6 +21,10 @@ export class Angulartics2 {
     @Param: ({url: string, location: Location})
    */
   public pageTrack: ReplaySubject<any> = new ReplaySubject(10);
+  /*
+    @Param: ({url: string, location: Location})
+   */
+  public globalUserData: ReplaySubject<any> = new ReplaySubject(10);
 
   /*
     @Param: ({action: any, properties: any})

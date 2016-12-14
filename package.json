@@ -1,7 +1,8 @@
 {
-  "name": "angulartics2",
+  "name": "angulartics2-housing",
   "description": "Vendor-agnostic web analytics for Angular2 applications",
   "homepage": "http://angulartics.github.io/",
+  "version": "0.1.0",
   "author": "João Ribeiro <jonnybgod@gmail.com> (http://github.com/JonnyBGod)",
   "contributors": [
     "Luis Farzati <lfarzati@gmail.com> (http://github.com/luisfarzati)",
@@ -33,7 +34,8 @@
     "Chris Soyars <ctso@ctso.me> (https://github.com/ctso)",
     "Fil Maj <maj.fil@gmail.com> (https://github.com/filmaj)",
     "Adam Yost <swimmadude66@users.noreply.github.com> (https://github.com/swimmadude66)",
-    "Adam S. Kirschner <accounts@adamskirschner.com> (https://github.com/hikirsch)"
+    "Adam S. Kirschner <accounts@adamskirschner.com> (https://github.com/hikirsch)",
+    "Dron Rathore <dron.rathore@gmail.com> (https://github.com/dronrathore)"
   ],
   "devDependencies": {
     "@angular/common": "~2.2.0",
@@ -80,15 +82,15 @@
   },
   "scripts": {
     "rimraf": "rimraf",
-    "lint": "tslint ./*.ts ./src/{,*/}*.ts",
-    "test": "tsc && karma start",
-    "test-watch": "tsc && concurrently \"tsc -w\" \"karma start karma.conf.js\"",
+    "lint": "./node_modules/.bin/tslint ./*.ts ./src/{,*/}*.ts",
+    "test": "./node_modules/.bin/tsc && ./node_modules/.bin/karma start",
+    "test-watch": "./node_modules/.bin/tsc && concurrently \"tsc -w\" \"./node_modules/.bin/karma start karma.conf.js\"",
     "clean": "npm cache clean && npm run rimraf -- node_modules dist",
     "preclean:install": "npm run clean",
     "clean:install": "npm set progress=false && npm i",
     "commit": "git-cz",
-    "build": "tsc -d && ngc",
-    "semantic-release": "semantic-release pre && npm run build && npm publish && semantic-release post"
+    "build": "./node_modules/.bin/tsc -d && ngc",
+    "semantic-release": "./node_modules/.bin/semantic-release pre && npm run build && npm publish && ./node_modules/.bin/semantic-release post"
   },
   "main": "./dist/index",
   "typings": "./dist/index.d.ts",

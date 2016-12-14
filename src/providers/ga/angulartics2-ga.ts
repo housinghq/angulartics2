@@ -8,7 +8,7 @@ declare var location: any;
 
 @Injectable()
 export class Angulartics2GoogleAnalytics {
-
+  public _gud : Object;
   constructor(
     private angulartics2: Angulartics2
   ) {
@@ -20,7 +20,7 @@ export class Angulartics2GoogleAnalytics {
       additionalAccountNames: [],
       userId: null
     };
-
+    this._gud = {}
     this.angulartics2.pageTrack.subscribe((x: any) => this.pageTrack(x.path));
 
     this.angulartics2.eventTrack.subscribe((x: any) => this.eventTrack(x.action, x.properties));
@@ -31,9 +31,13 @@ export class Angulartics2GoogleAnalytics {
 
     this.angulartics2.setUserProperties.subscribe((x: any) => this.setUserProperties(x));
 
+    this.angulartics2.globalUserData.subscribe((x:any)=> this.setGlobalUserData(x))
+
     this.angulartics2.userTimings.subscribe((x: any) => this.userTimings(x));
   }
-
+  setGlobalUserData(data: any){
+    this._gud = Object.assign({}, this._gud, data)
+  }
   pageTrack(path: string) {
     if (typeof _gaq !== 'undefined' && _gaq) {
       _gaq.push(['_trackPageview', path]);
@@ -81,7 +85,7 @@ export class Angulartics2GoogleAnalytics {
       var eventOptions = {
         eventCategory: properties.category,
         eventAction: action,
-        eventLabel: properties.label,
+        eventLabel: Object.assign({}, properties.label, this._gud),
         eventValue: properties.value,
         nonInteraction: properties.noninteraction,
         page: properties.page || location.hash.substring(1) || location.pathname,

@@ -43,9 +43,10 @@ describe('Angulartics2GoogleAnalytics', () => {
     fakeAsync(inject([Location, Angulartics2, Angulartics2GoogleAnalytics],
         (location: Location, angulartics2: Angulartics2, angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics) => {
           fixture = createRoot(RootCmp);
+          angulartics2.globalUserData.next({g: 1})
           angulartics2.eventTrack.next({ action: 'do', properties: { category: 'cat' } });
           advance(fixture);
-          expect(ga).toHaveBeenCalledWith('send', 'event', { eventCategory: 'cat', eventAction: 'do', eventLabel: undefined, eventValue: undefined, nonInteraction: undefined, page: '/context.html', userId: null });
+          expect(ga).toHaveBeenCalledWith('send', 'event', { eventCategory: 'cat', eventAction: 'do', eventLabel: {g:1}, eventValue: undefined, nonInteraction: undefined, page: '/context.html', userId: null });
       })));
 
   it('should track exceptions',
