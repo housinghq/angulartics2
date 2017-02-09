@@ -85,7 +85,7 @@ export class Angulartics2GoogleAnalytics {
       var eventOptions = {
         eventCategory: properties.category,
         eventAction: action,
-        eventLabel: Object.assign({}, properties.label, this._gud),
+        eventLabel: JSON.stringify(Object.assign({}, properties.label, this._gud)),
         eventValue: properties.value,
         nonInteraction: properties.noninteraction,
         page: properties.page || location.hash.substring(1) || location.pathname,

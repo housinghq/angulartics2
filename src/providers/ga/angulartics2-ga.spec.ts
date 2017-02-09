@@ -46,7 +46,7 @@ describe('Angulartics2GoogleAnalytics', () => {
           angulartics2.globalUserData.next({g: 1})
           angulartics2.eventTrack.next({ action: 'do', properties: { category: 'cat' } });
           advance(fixture);
-          expect(ga).toHaveBeenCalledWith('send', 'event', { eventCategory: 'cat', eventAction: 'do', eventLabel: {g:1}, eventValue: undefined, nonInteraction: undefined, page: '/context.html', userId: null });
+          expect(ga).toHaveBeenCalledWith('send', 'event', { eventCategory: 'cat', eventAction: 'do', eventLabel: JSON.stringify({g:1}), eventValue: undefined, nonInteraction: undefined, page: '/context.html', userId: null });
       })));
 
   it('should track exceptions',
